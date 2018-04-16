@@ -12112,7 +12112,7 @@ Standard deviation of prices: $165,171.13
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Yes, it succesfully captures the variaton of the target variable as it is close to 1, in this case 92.3%. In this case Y also has a strong correlation with variable X.</p>
+<p>Yes. R2 score in this case shows the variation percentage (from 0 to 1) between our y_true and y_predicted values comparing them against each other.  In this case a value of .923 does represent a favorable result showing only a 7.7% prediction error (1 - 92.3 = 7.7)</p>
 
 </div>
 </div>
@@ -12405,35 +12405,30 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
-<li>The grid search technique allows to compare different models from a particular learning algorithm and their respective hyper-parameters. In this case we are looking to compare a particular score whether its a classification or a regression problem. It can be mainly used for Support Vector Machines where there are mainly two hyper-parameters in this case kernel(linear and polynomial) and gamma (multiple positive values). Table below may help visualizing what this technique entails and marking in bold the highest f1 score.</li>
+<li>The grid search technique allows to compare different models from a particular learning algorithm and their respective hyper-parameters. Our particular case is a regression problem using a decision tree learning algorithm thus only utilizing hyper-parameters such as max depth and comparing their R2 score choosing the best performer.</li>
 </ul>
 <table>
 <thead><tr>
-<th>C/Kernel</th>
-<th>Linear</th>
-<th>Polynomial</th>
+<th>Max depth</th>
+<th>R2 Score</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0.1</td>
-<td>f1 score=0.4</td>
-<td>f1 score=0.4</td>
+<td>1</td>
+<td>?</td>
 </tr>
 <tr>
-<td>1.0</td>
-<td>f1 score=0.6</td>
-<td>f1 score=0.5</td>
+<td>2</td>
+<td>?</td>
 </tr>
 <tr>
-<td>10</td>
-<td>f1 score=0.5</td>
-<td><strong>f1 score=0.8</strong></td>
+<td>3</td>
+<td>?</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>...</td>
+<td>?</td>
 </tr>
 </tbody>
 </table>
@@ -12463,9 +12458,9 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
-<li><p>K - Fold cross validation allow us to reuse our data for training and validation purposes instead of having a single split where validating the model only occurs once. In this tecnhique the data set is divided into "K" buckets and using "K -1"  buckets for training and the remaining for validating. This is performed "K" times and the average of each of those iterations will be the final output.</p>
+<li><p>K - Fold cross validation allow us to reuse our data for training and validation purposes instead of having a single split where validating the model only occurs once. In this tecnhique the data set is divided into "K" buckets and using "K -1"  buckets for training and the remaining for validating. This is performed "K" times and the average of each of those iterations will be the final output. This allows to get an unbiased estimate of model generalization on unseen data.</p>
 </li>
-<li><p>Generalization performance can be overlooked when not using the K-fold cross validation technique (or similar ones) when using choosing Grid Search. This can be seen, for example, while using an SVM supervised learning algorithm in which tweaking the hyper-parameters may only work for a particular instance. Using different datas sets for training and validating with different instances will aid in considering a wide variety of cases.</p>
+<li><p>Generalization performance may not be optimal or best when not applying the <strong>K-Fold cross validation technique</strong> (or similar ones) and using Grid Search. For example if we choose a <strong>Train-Test split method</strong>, only a particular fixed data arrange is considered thus not taking into account other instances that may bring added value when predicting unseen data.</p>
 </li>
 </ul>
 
@@ -12703,9 +12698,12 @@ Predicted selling price for Client 3&#39;s home: $927,500.00
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong></p>
+<p><strong>Answer</strong></p>
+<p>In conclusion we can say that the client´s predictions do seem reasonable comparing them with previously calculated descriptive statistics (median, min, max). For client #</p>
 <ul>
-<li>Predictions provided by the code above seem fair as all the values fall within the dataset range previously calculated. In other words they all fall between the Max, Min and the Mean of prices from the Data Exploration excercise along with their features. Table below has the following information for max and min values only.</li>
+<li>1 : RM and PTRATIO are really close to those provided by the datapoints for the calculated Median. LSTAT however does have more variation</li>
+<li>2 : RM, LSTAT and PTRATIO have a predicted variation </li>
+<li>3 : RM, LSTAT and PTRATIO also have a predicted variation</li>
 </ul>
 <table>
 <thead><tr>
@@ -12717,16 +12715,59 @@ Predicted selling price for Client 3&#39;s home: $927,500.00
 </thead>
 <tbody>
 <tr>
-<td>min = 105,000.00</td>
+<td>median = 438,900</td>
+<td>5.88</td>
+<td>9.02</td>
+<td>17.65</td>
+</tr>
+<tr>
+<td>min = 105,000</td>
 <td>5.453</td>
 <td>30.59</td>
 <td>20.2</td>
 </tr>
 <tr>
-<td>max = 1,024,800.00</td>
+<td>max = 1,204,800</td>
 <td>8.398</td>
 <td>5.91</td>
 <td>13</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead><tr>
+<th>Client</th>
+<th>Predicted Price</th>
+<th>RM</th>
+<th>LSTAT</th>
+<th>PTRATIO</th>
+<th>Compared with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>419,700.00</td>
+<td>5</td>
+<td>17</td>
+<td>15</td>
+<td>Median</td>
+</tr>
+<tr>
+<td>2</td>
+<td>287,100.00</td>
+<td>4</td>
+<td>32</td>
+<td>22</td>
+<td>Min value</td>
+</tr>
+<tr>
+<td>3</td>
+<td>927,500.00</td>
+<td>8</td>
+<td>3</td>
+<td>12</td>
+<td>Max value</td>
 </tr>
 </tbody>
 </table>
